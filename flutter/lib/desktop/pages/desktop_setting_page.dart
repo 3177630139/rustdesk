@@ -500,20 +500,21 @@ class _GeneralState extends State<_General> {
               isServer: false,
             ),
           ),
-        if (!isWeb && !bind.isCustomClient())
-          _OptionCheckBox(
-            context,
-            'Check for software update on startup',
-            kOptionEnableCheckUpdate,
-            isServer: false,
-          ),
-        if (showAutoUpdate)
-          _OptionCheckBox(
-            context,
-            'Auto update',
-            kOptionAllowAutoUpdate,
-            isServer: true,
-          ),
+        // 移除软件更新相关选项
+        // if (!isWeb && !bind.isCustomClient())
+        //   _OptionCheckBox(
+        //     context,
+        //     'Check for software update on startup',
+        //     kOptionEnableCheckUpdate,
+        //     isServer: false,
+        //   ),
+        // if (showAutoUpdate)
+        //   _OptionCheckBox(
+        //     context,
+        //     'Auto update',
+        //     kOptionAllowAutoUpdate,
+        //     isServer: true,
+        //   ),
         if (isWindows && !bind.isOutgoingOnly())
           _OptionCheckBox(
             context,

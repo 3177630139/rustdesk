@@ -70,7 +70,8 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
       false; //androidVersion >= 26; // remove because not work on every device
   var _ignoreBatteryOpt = false;
   var _enableStartOnBoot = false;
-  var _checkUpdateOnStartup = false;
+  // 移除更新检查相关变量
+  // var _checkUpdateOnStartup = false;
   var _floatingWindowDisabled = false;
   var _keepScreenOn = KeepScreenOn.duringControlled; // relay on floating window
   var _enableAbr = false;
@@ -165,12 +166,13 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
         _enableStartOnBoot = enableStartOnBoot;
       }
 
-      var checkUpdateOnStartup =
-          mainGetLocalBoolOptionSync(kOptionEnableCheckUpdate);
-      if (checkUpdateOnStartup != _checkUpdateOnStartup) {
-        update = true;
-        _checkUpdateOnStartup = checkUpdateOnStartup;
-      }
+      // 移除更新检查相关的初始化
+      // var checkUpdateOnStartup =
+      //     mainGetLocalBoolOptionSync(kOptionEnableCheckUpdate);
+      // if (checkUpdateOnStartup != _checkUpdateOnStartup) {
+      //   update = true;
+      //   _checkUpdateOnStartup = checkUpdateOnStartup;
+      // }
 
       var floatingWindowDisabled =
           bind.mainGetLocalOption(key: kOptionDisableFloatingWindow) == "Y" ||
@@ -570,21 +572,22 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
           gFFI.invokeMethod(AndroidChannel.kSetStartOnBootOpt, toValue);
         }));
 
-    if (!bind.isCustomClient()) {
-      enhancementsTiles.add(
-        SettingsTile.switchTile(
-          initialValue: _checkUpdateOnStartup,
-          title:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(translate('Check for software update on startup')),
-          ]),
-          onToggle: (bool toValue) async {
-            await mainSetLocalBoolOption(kOptionEnableCheckUpdate, toValue);
-            setState(() => _checkUpdateOnStartup = toValue);
-          },
-        ),
-      );
-    }
+    // 移除移动端更新选项
+    // if (!bind.isCustomClient()) {
+    //   enhancementsTiles.add(
+    //     SettingsTile.switchTile(
+    //       initialValue: _checkUpdateOnStartup,
+    //       title:
+    //           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    //         Text(translate('Check for software update on startup')),
+    //       ]),
+    //       onToggle: (bool toValue) async {
+    //         await mainSetLocalBoolOption(kOptionEnableCheckUpdate, toValue);
+    //         setState(() => _checkUpdateOnStartup = toValue);
+    //       },
+    //     ),
+    //   );
+    // }
 
     onFloatingWindowChanged(bool toValue) async {
       if (toValue) {
